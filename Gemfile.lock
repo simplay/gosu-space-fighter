@@ -1,0 +1,15 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    gosu (0.10.7)
+    ocra (1.3.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  gosu
+  ocra
+
+BUNDLED WITH
+   1.10.6
