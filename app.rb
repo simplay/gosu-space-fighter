@@ -1,6 +1,7 @@
 require 'gosu'
 require_relative 'player'
 require_relative 'star'
+require_relative 'point2d'
 
 module ZOrder
     Background, Stars, Player, UI = *0..3
@@ -8,7 +9,7 @@ end
 
 class GameWindow < Gosu::Window
   def initialize
-    super 640, 480
+    super(640, 480)
     self.caption = "Gosu Tutorial Game"
 
     @background_image = Gosu::Image.new("media/space.png", :tileable => true)

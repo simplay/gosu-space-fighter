@@ -1,19 +1,28 @@
 class Star
-  attr_reader :x, :y
 
+  # @param animation [Gosu::Image]
   def initialize(animation)
     @animation = animation
     @color = Gosu::Color.new(0xff_000000)
     @color.red = rand(256 - 40) + 40
     @color.green = rand(256 - 40) + 40
     @color.blue = rand(256 - 40) + 40
-    @x = rand * 640
-    @y = rand * 480
+    @position = Point2d.new(rand * 640, rand * 480)
+    @offset = rand * 1000
   end
 
-  def draw  
-    img = @animation[Gosu::milliseconds / 100 % @animation.size];
-    img.draw(@x - img.width / 2.0, @y - img.height / 2.0,
+  def x
+    @position.x
+  end
+
+  def y
+    @position.y
+  end
+
+  def draw
+    dt = (@offset + Gosu::milliseconds) / 100
+    img = @animation[dt % @animation.size];
+    img.draw(@position.x - img.width / 2.0, @position.y - img.height / 2.0,
         ZOrder::Stars, 1, 1, @color, :add)
   end
 end
