@@ -2,6 +2,7 @@ require 'gosu'
 require_relative 'player'
 require_relative 'star'
 require_relative 'point2d'
+require_relative 'settings'
 
 module ZOrder
     Background, Stars, Player, UI = *0..3
@@ -9,13 +10,13 @@ end
 
 class GameWindow < Gosu::Window
   def initialize
-    super(640, 480)
+    super(Settings.width, Settings.height)
     self.caption = "Gosu Tutorial Game"
 
     @background_image = Gosu::Image.new("media/space.png", :tileable => true)
 
     @player = Player.new
-    @player.warp(320, 240)
+    @player.place(Settings.width / 2, Settings.height / 2)
 
     @star_anim = Gosu::Image::load_tiles("media/star.png", 25, 25)
     @stars = Array.new
@@ -24,20 +25,20 @@ class GameWindow < Gosu::Window
   end
 
   def update
-    if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft then
+    if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft
       @player.turn_left
     end
-    if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight then
+    if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight
       @player.turn_right
     end
-    if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpButton0 then
+    if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpButton0
       @player.accelerate
     end
 
     @player.move
     @player.collect_stars(@stars)
 
-    if rand(100) < 4 and @stars.size < 25 then
+    if rand(100) < 4 and @stars.size < 25
       @stars.push(Star.new(@star_anim))
     end
   end

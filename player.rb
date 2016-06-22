@@ -10,7 +10,7 @@ class Player
     @score = 0
   end
 
-  def warp(x, y)
+  def place(x, y)
     @position.update(x, y)
   end
 
@@ -32,7 +32,7 @@ class Player
 
   def move
     @position.add(@velocity)
-    @position.update(@position.x % 640, @position.y % 480)
+    @position.update(@position.x % Settings.width, @position.y % Settings.height)
     @velocity.scale(0.95)
   end
 

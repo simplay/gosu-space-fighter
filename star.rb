@@ -7,7 +7,7 @@ class Star
     @color.red = rand(256 - 40) + 40
     @color.green = rand(256 - 40) + 40
     @color.blue = rand(256 - 40) + 40
-    @position = Point2d.new(rand * 640, rand * 480)
+    @position = Point2d.new(rand * Settings.width, rand * Settings.height)
     @offset = rand * 1000
   end
 
