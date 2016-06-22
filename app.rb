@@ -3,10 +3,8 @@ require_relative 'player'
 require_relative 'star'
 require_relative 'point2d'
 require_relative 'settings'
+require_relative 'layer_order'
 
-module ZOrder
-    Background, Stars, Player, UI = *0..3
-end
 
 class GameWindow < Gosu::Window
   def initialize
@@ -44,10 +42,10 @@ class GameWindow < Gosu::Window
   end
 
   def draw
-    @background_image.draw(0, 0, ZOrder::Background)
+    @background_image.draw(0, 0, LayerOrder::Background)
     @player.draw
     @stars.each { |star| star.draw }
-    @font.draw("Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xff_ffff00)
+    @font.draw("Score: #{@player.score}", 10, 10, LayerOrder::UI, 1.0, 1.0, 0xff_ffff00)
   end
 
   def button_down(id)

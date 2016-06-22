@@ -23,6 +23,6 @@ class Star
     dt = (@offset + Gosu::milliseconds) / 100
     img = @animation[dt % @animation.size];
     img.draw(@position.x - img.width / 2.0, @position.y - img.height / 2.0,
-        ZOrder::Stars, 1, 1, @color, :add)
+        LayerOrder::Stars, 1, 1, @color, :add)
   end
 end

@@ -23,11 +23,11 @@ class Player
   end
 
   def accelerate
-    p_t = Point2d.new(
+    dv = Point2d.new(
       Gosu::offset_x(@angle, 0.5),
       Gosu::offset_y(@angle, 0.5)
     )
-    @velocity.add(p_t)
+    @velocity.add(dv)
   end
 
   def move
@@ -37,7 +37,7 @@ class Player
   end
 
   def draw
-    @image.draw_rot(@position.x, @position.y, 1, @angle)
+    @image.draw_rot(@position.x, @position.y, LayerOrder::Player, @angle)
   end
 
   def score
