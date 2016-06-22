@@ -22,6 +22,23 @@ class Player
     @angle += 4.5
   end
 
+  def position
+    @position.copy
+  end
+
+  def angle
+    @angle
+  end
+
+  def fire
+    @t2 = @t1
+    @t1 = Time.now
+    return true if @t2.nil?
+    delta = @t1 - @t2 # in seconds
+    puts "t1=#{@t1}, t2=#{@t2}, d=#{delta}"
+    delta > 0.2
+  end
+
   def accelerate
     dv = Point2d.new(
       Gosu::offset_x(@angle, 0.5),

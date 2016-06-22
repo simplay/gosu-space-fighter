@@ -10,6 +10,7 @@ class GameWindow < Gosu::Window
 
     @star_anim = Gosu::Image::load_tiles("media/star.png", 25, 25)
     @stars = Array.new
+    @bullets = Array.new
 
     @font = Gosu::Font.new(20)
   end
@@ -21,15 +22,24 @@ class GameWindow < Gosu::Window
     if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft
       @player.turn_left
     end
+
     if Gosu::button_down? Gosu::KbRight or Gosu::button_down? Gosu::GpRight
       @player.turn_right
     end
+
     if Gosu::button_down? Gosu::KbUp or Gosu::button_down? Gosu::GpButton0
       @player.accelerate
     end
 
+    if Gosu::button_down? Gosu::KbSpace
+      if @player.fire
+        @bullets.push(Bullet.new(@player.position, @player.angle, 4))
+      end
+    end
+
     @player.move
     @player.collect_stars(@stars)
+    @bullets.each(&:move)
 
     if rand(100) < 4 and @stars.size < 25
       @stars.push(Star.new(@star_anim))
@@ -44,6 +54,7 @@ class GameWindow < Gosu::Window
     @background_image.draw(0, 0, LayerOrder::Background)
     @player.draw
     @stars.each(&:draw)
+    @bullets.each(&:draw)
     @font.draw("Score: #{@player.score}", 10, 10, LayerOrder::UI, 1.0, 1.0, 0xff_ffff00)
   end
 

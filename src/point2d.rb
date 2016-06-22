@@ -12,6 +12,13 @@ class Point2d
     @y = y
   end
 
+  # Create a shallow copy of this 2d point.
+  #
+  # @return [Point2d] copy of this point.
+  def copy
+    Point2d.new(@x, @y)
+  end
+
   # Add another 2d point to this point.
   #
   # @info: Updates the coordinates of this point.
@@ -20,6 +27,17 @@ class Point2d
   def add(p)
     @x = @x + p.x
     @y = @y + p.y
+    self
+  end
+
+  # Subtract another 2d point to this point.
+  #
+  # @info: Updates the coordinates of this point.
+  # @param p [Point2d] point to be subtracted.
+  # @return [Point2d] updated point.
+  def sub(p)
+    @x = @x - p.x
+    @y = @y - p.y
     self
   end
 
