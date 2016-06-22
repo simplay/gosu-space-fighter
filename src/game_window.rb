@@ -1,7 +1,7 @@
 class GameWindow < Gosu::Window
   def initialize
     super(Settings.width, Settings.height)
-    self.caption = "Gosu Tutorial Game"
+    self.caption = "Gosu SpaceFighter"
 
     @background_image = Gosu::Image.new("media/space.png", :tileable => true)
 
