@@ -22,6 +22,9 @@ class GameWindow < Gosu::Window
     @font = Gosu::Font.new(20)
   end
 
+  # Is called 60 times per second (by default)
+  # and should contain the main game logic:
+  # move objects, handle collisions, etc.)
   def update
     if Gosu::button_down? Gosu::KbLeft or Gosu::button_down? Gosu::GpLeft
       @player.turn_left
@@ -41,10 +44,14 @@ class GameWindow < Gosu::Window
     end
   end
 
+  # is called after #update and whenever the window needs redrawing
+  # for other reasons, and may also be skipped every other time
+  # if the FPS go too low. It should contain the code
+  # to redraw the whole screen, but no updates to the game's state.
   def draw
     @background_image.draw(0, 0, LayerOrder::Background)
     @player.draw
-    @stars.each { |star| star.draw }
+    @stars.each(&:draw)
     @font.draw("Score: #{@player.score}", 10, 10, LayerOrder::UI, 1.0, 1.0, 0xff_ffff00)
   end
 
