@@ -32,7 +32,7 @@ class GameWindow < Gosu::Window
     end
 
     if Gosu::button_down? Gosu::KbSpace
-      if @player.fire
+      if @player.may_fire?
         @bullets.push(Bullet.new(@player.position, @player.angle, 4))
       end
     end

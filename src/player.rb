@@ -30,13 +30,17 @@ class Player
     @angle
   end
 
-  def fire
+  # Checks whether this player may again fire a bullet.
+  # A player can fire a new bullet every 0.2 seconds.
+  #
+  # @return [Boolean] true if this player may fire another bullet,
+  #   false otherwise.
+  def may_fire?
     @t2 = @t1
     @t1 = Time.now
     return true if @t2.nil?
-    delta = @t1 - @t2 # in seconds
-    puts "t1=#{@t1}, t2=#{@t2}, d=#{delta}"
-    delta > 0.2
+    elapsed_time = @t1 - @t2
+    elapsed_time > 0.2
   end
 
   def accelerate
